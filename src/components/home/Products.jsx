@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { AddToCart } from "../../redux/action/Actions";
 const Products = () => {
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -25,10 +26,11 @@ const Products = () => {
   useEffect(() => {
     getAllproducts();
     getAllCategories();
-    return ()=>{
-      clearInterval(getAllproducts,getAllCategories);
-   }
+    return () => {
+      clearInterval(getAllproducts, getAllCategories);
+    };
   }, []);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -43,7 +45,6 @@ const Products = () => {
           {categories.map((cat) => {
             return (
               <button
-
                 onClick={() => getProductsInCategories(cat)}
                 className="btn btn-outline-dark ms-2"
                 key={cat}
@@ -56,13 +57,13 @@ const Products = () => {
         <div className="row">
           {data.map((item) => {
             return (
-              <div className="col-md-4 d-flex g-3"  key={item.id}>
-                <div className="card shadow-lg" >
+              <div className="col-md-4 d-flex g-3" key={item.id}>
+                <div className="card shadow-lg">
                   <img
                     src={item.image}
                     className="card-img-top"
                     alt={item.title}
-                  style={{width:"100%",height:"40%"}}
+                    style={{ width: "100%", height: "40%" }}
                   />
                   <div className="card-body d-flex flex-column justify-content-center align-content-center">
                     <h5 className="card-title">{item.title}</h5>
@@ -70,12 +71,19 @@ const Products = () => {
                     <p className="card-text">Price: ${item.price}</p>
                   </div>
                   <div className="d-flex justify-content-between p-4">
-                      <Link to={`/product/${item.id}`} className="btn btn-outline-dark">
-                        Go Details
-                      </Link>
-                      <Link to="/" className="btn btn-outline-dark">
+                    <Link
+                      to={`/product/${item.id}`}
+                      className="btn btn-outline-dark"
+                    >
+                      Go Details
+                    </Link>
+                    <Link
+                      to="/"
+                      className="btn btn-outline-dark"
+                      onClick={() => dispatch(AddToCart(item))}
+                    >
                       Add to Cart
-                      </Link>
+                    </Link>
                   </div>
                 </div>
               </div>
