@@ -10,11 +10,14 @@ const Cart = () => {
         <div className="card mb-3 shadow-lg" key={x.id}>
           <div className="row g-0">
             <div className="col-md-4">
+              
               <img
                 src={x.image}
                 className="img-fluid rounded-start"
                 alt={x.title}
+      
               />
+          
             </div>
             <div className="col-md-8">
               <div className="card-body">
