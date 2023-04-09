@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { add_to_cart } from "../../redux/action/Actions";
 import { useDispatch } from "react-redux";
-import { AddToCart } from "../../redux/action/Actions";
+
 const Products = () => {
+
+  const dispatch = useDispatch();
+
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const api_url = "https://fakestoreapi.com/products";
@@ -30,7 +34,6 @@ const Products = () => {
       clearInterval(getAllproducts, getAllCategories);
     };
   }, []);
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -80,7 +83,7 @@ const Products = () => {
                     <Link
                       to="/"
                       className="btn btn-outline-dark"
-                      onClick={() => dispatch(AddToCart(item))}
+                      onClick={() => dispatch(add_to_cart(item))}
                     >
                       Add to Cart
                     </Link>

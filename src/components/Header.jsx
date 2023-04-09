@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 const Header = () => {
-  const state = useSelector((state) => state.CartReducer);
+  const state = useSelector(state=>state);
   return (
     <nav className="navbar navbar-expand-lg bg-light shadow-sm py-3 sticky-top">
       <div className="container">

@@ -1,13 +1,8 @@
-import { addItem, delItem } from "./Types";
-export const AddToCart = (product) => {
-  return {
-    type: addItem,
-    payload: product,
-  };
+import { ADD_ITEM, REMOVE_ITEM } from "./Types";
+
+export const add_to_cart = (item) => {
+  return { type: ADD_ITEM, payload: item };
 };
-export const DelFromCart = (product) => {
-  return {
-    type: delItem,
-    payload: product,
-  };
+export const remove_from_cart = (item) => {
+  return { type: REMOVE_ITEM, payload: item };
 };

@@ -1,72 +1,50 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { AddToCart, DelFromCart } from "../redux/action/Actions";
-
+import { useDispatch, useSelector } from "react-redux";
+import { add_to_cart, remove_from_cart } from "../redux/action/Actions";
 
 const Cart = () => {
-  const total=(p,c)=>{p+c}
-  const state = useSelector((state) => state.CartReducer);
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
-
-  const getTotal = (qty, price) => {
-    return qty * price;
-
-
-  };
-  return (
-    <div className="container position-relative">
-      <h1
-        className="text-center text-uppercase my-5 fixed-top "
-        style={{ top: "50px" }}
-      >
-        total price: {total}$
-      </h1>
-      {state.length ? (
-        state.map((x) => (
-          <div className="row">
-            <div className="card mb-3 d-flex flex-row justify-content-between align-items-center">
+  return state.length ? (
+    <div className="my-5 container">
+      {state.map((x) => (
+        <div className="card mb-3 shadow-lg" key={x.id}>
+          <div className="row g-0">
+            <div className="col-md-4">
               <img
                 src={x.image}
-                className="card-img-top w-50 h-50"
-                alt={x.id}
+                className="img-fluid rounded-start"
+                alt={x.title}
               />
+            </div>
+            <div className="col-md-8">
               <div className="card-body">
-                <h5 className="card-title fs-1 fw-bold">{x.title}</h5>
-                <p className="card-text fs-4 fw-bold">{x.category}</p>
-                <p className="card-text fs-5">{x.description}</p>
-                <p className="card-text fs-2">
+                <h5 className="card-title">{x.title}</h5>
+                <p className="card-text">{x.description}</p>
+                <p className="card-text">
                   <small className="text-body-secondary">
-                    {x.quantity} x {x.price} = {getTotal(x.quantity, x.price)}
+                    price: {x.qty} x ${x.price} = ${x.qty * x.price}
                   </small>
                 </p>
-
-                <div className="d-flex w-75 m-auto">
-                  <button
-                    className="btn btn-outline-secondary btn-sm"
-                    onClick={() => {
-                      dispatch(AddToCart(x));
-                    }}
-                  >
-                    +
-                  </button>
-              
-                  <button
-                    className="btn btn-outline-secondary btn-sm"
-                    onClick={() => {
-                      dispatch(DelFromCart(x));
-                    }}
-                  >
-                    -
-                  </button>
-                </div>
+                <button
+                  className="btn btn-outline-dark me-2"
+                  onClick={() => dispatch(add_to_cart(x))}
+                >
+                  +
+                </button>
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={() => dispatch(remove_from_cart(x))}
+                >
+                  -
+                </button>
               </div>
             </div>
           </div>
-        ))
-      ) : (
-        <h1 className="text-center my-5 text-uppercase">No Item In Cart</h1>
-      )}
+        </div>
+      ))}
     </div>
+  ) : (
+    <h1 className="text-center my-5">NO ITEM IN CART</h1>
   );
 };
 
