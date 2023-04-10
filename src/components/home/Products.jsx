@@ -4,7 +4,6 @@ import { add_to_cart } from "../../redux/action/Actions";
 import { useDispatch } from "react-redux";
 
 const Products = () => {
-
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);

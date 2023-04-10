@@ -1,6 +1,7 @@
+
 import { ADD_ITEM, REMOVE_ITEM } from "../action/Types";
 
-const initailState = [];
+ const initailState = [];
 
 const CartReducer = (state = initailState, action) => {
   const product = action.payload;
@@ -29,6 +30,7 @@ const CartReducer = (state = initailState, action) => {
           x.id === product.id ? { ...x, qty: x.qty - 1 } : x
         );
       }
+    
     default:
       return state;
       break;
